@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Menu extends JFrame implements ActionListener{
-    private JMenuBar menuBar;
+    private JMenuBar menuBar = new JMenuBar();
     private JMenu menu1,subMenu,menu2, menu3;
     private JMenuItem menu2Item,textItem,imageItem,submenuItem,exitItem, menu3Item;
     public Menu()
@@ -12,14 +12,12 @@ public class Menu extends JFrame implements ActionListener{
         setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        menuBar=new JMenuBar();
-
         menu1=new JMenu("Menu1 Options");
         textItem=new JMenuItem("Text Item");
         menu1.add(textItem);
         menu1.addSeparator();
 
-        imageItem=new JMenuItem("text with an Icon");
+        imageItem=new JMenuItem("Icon Text");
         ImageIcon ic=new ImageIcon(new ImageIcon("face.JPG").getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT));
         imageItem.setIcon(ic);
         menu1.add(imageItem);

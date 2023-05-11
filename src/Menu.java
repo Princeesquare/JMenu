@@ -3,43 +3,44 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Menu extends JFrame implements ActionListener{
-    private JMenuBar menuBar = new JMenuBar();
-    private JMenu menu1,subMenu,menu2, menu3;
-    private JMenuItem menu2Item,textItem,imageItem,submenuItem,exitItem, menu3Item;
+    private final JMenuItem menu2Item;
+    private final JMenuItem exitItem;
+    private final JMenuItem menu3Item;
     public Menu()
     {
         setSize(400,200);
         setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        menu1=new JMenu("Menu1 Options");
-        textItem=new JMenuItem("Text Item");
+        JMenu menu1 = new JMenu("Menu1 Options");
+        JMenuItem textItem = new JMenuItem("Text Item");
         menu1.add(textItem);
         menu1.addSeparator();
 
-        imageItem=new JMenuItem("Icon Text");
+        JMenuItem imageItem = new JMenuItem("Icon Text");
         ImageIcon ic=new ImageIcon(new ImageIcon("face.JPG").getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT));
         imageItem.setIcon(ic);
         menu1.add(imageItem);
         menu1.addSeparator();
 
-        subMenu=new JMenu("SubMenu Options");
-        submenuItem=new JMenuItem("Option1");
+        JMenu subMenu = new JMenu("SubMenu Options");
+        JMenuItem submenuItem = new JMenuItem("Option1");
         subMenu.add(submenuItem);
         menu1.add(subMenu);
         menu1.addSeparator();
 
         exitItem=new JMenuItem("Exit");
         menu1.add(exitItem);
+        JMenuBar menuBar = new JMenuBar();
         menuBar.add(menu1);
 
-        menu2=new JMenu("Menu2 Options");
+        JMenu menu2 = new JMenu("Menu2 Options");
         menu2Item=new JMenuItem("Show the second Form");
         menu2.add(menu2Item);
         menuBar.add(menu2);
         menu2.addSeparator();
 
-        menu3 = new JMenu("My Own Menu");
+        JMenu menu3 = new JMenu("My Name");
         menu3Item = new JMenuItem("See My name");
         menu3.add(menu3Item);
         menu3.addSeparator();
@@ -48,6 +49,7 @@ public class Menu extends JFrame implements ActionListener{
         add(menuBar);
 
         menu3Item.addActionListener(this);
+        menu2Item.addActionListener(this);
         exitItem.addActionListener(this);
         setVisible(true);
     }
@@ -55,9 +57,19 @@ public class Menu extends JFrame implements ActionListener{
     {
         if(e.getSource()==exitItem)
         {
-            dispose();
+            this.dispose();
         }
-        if(e.getSource() == menu3Item)
+        if(e.getSource() == menu3Item) {
+            if (JOptionPane.showConfirmDialog(null, "Are You Sure you want to see my name?", "Important Question",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION)
             JOptionPane.showMessageDialog(null, "My Name is Prince Emmanuel");
+            else
+                return;
+        }
+        if (e.getSource() == menu2Item)
+        {
+            new form2();
+            this.dispose();
+        }
     }
 }
